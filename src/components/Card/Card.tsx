@@ -1,10 +1,15 @@
 import React from "react";
 import * as STC from "./Card.style";
 
-const Card = () => {
+interface ICardProps {
+  data: string;
+  handleClick: () => void;
+}
+
+const Card = ({ data, handleClick }: ICardProps) => {
   return (
-    <STC.Container>
-      <STC.Wrapper>Card!</STC.Wrapper>
+    <STC.Container id={data} onClick={handleClick}>
+      <STC.Wrapper>{data}</STC.Wrapper>
     </STC.Container>
   );
 };

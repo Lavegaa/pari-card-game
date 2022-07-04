@@ -6,5 +6,4 @@ export const Board = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
-  background-color: blue;
 `;

@@ -1,4 +1,4 @@
-const countries = {
+const countriesData = {
   네팔: "카트만두",
   대한민국: "서울",
   동티모르: "딜리",
@@ -37,7 +37,6 @@ const countries = {
   카자흐스탄: "아스타나",
   카타르: "도하",
   캄보디아: "프놈펜",
-  쿠웨이트: "쿠웨이트",
   키르기스스탄: "비슈케크(카자흐스탄)",
   태국: "방콕",
   타지키스탄: "두샨베",
@@ -48,4 +47,4 @@ const countries = {
   필리핀: "마닐라",
 };
 
-export default countries;
+export default countriesData;
