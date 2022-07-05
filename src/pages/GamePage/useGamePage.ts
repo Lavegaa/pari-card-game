@@ -52,11 +52,10 @@ const useGamePage = () => {
             (country) => country !== check[0] && country !== check[1]
           )
         );
-      } else
+      } else {
         check.forEach((val) => {
           handleStyle(val, "red");
         });
-      {
       }
     } else {
     }
