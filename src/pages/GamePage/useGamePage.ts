@@ -13,18 +13,28 @@ const useGamePage = () => {
 
   const handleRandomCountries = () => {
     for (const [key, value] of Object.entries(countries)) {
-      console.log("key:  ", key);
-      console.log("value:  ", value);
       setCountriesArr((val: any) => [...val, key, value]);
     }
     setCountriesArr((val) => val.sort(() => Math.random() - 0.5));
   };
 
   const handleClick = (data: string) => {
-    setCheck((val) => [...val, data]);
+    if (check.length < 2) {
+      setCheck((val) => [...val, data]);
+      handleStyle(data, "blue");
+    } else {
+      check.forEach((val) => {
+        handleStyle(val, "white");
+      });
+      setCheck([data]);
+      handleStyle(data, "blue");
+    }
+  };
+
+  const handleStyle = (data: string, style: string) => {
     const dom = document.getElementById(data);
     if (!dom) return;
-    dom.style.backgroundColor = "blue";
+    dom.style.backgroundColor = style;
   };
 
   useEffect(() => {
@@ -42,20 +52,15 @@ const useGamePage = () => {
             (country) => country !== check[0] && country !== check[1]
           )
         );
+      } else
+        check.forEach((val) => {
+          handleStyle(val, "red");
+        });
+      {
       }
-      check.forEach((val) => {
-        const dom = document.getElementById(val);
-        if (!dom) return;
-        dom.style.backgroundColor = "red";
-      });
-      setCheck([]);
     } else {
     }
   }, [check]);
-
-  useEffect(() => {
-    console.log("countriesArr:  ", countriesArr);
-  }, [countriesArr]);
 
   return { countriesArr, handleClick };
 };
