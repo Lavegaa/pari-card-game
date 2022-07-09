@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-const basis = `${Math.floor(100 / 2 - 1.5 * 2)}%`;
-
-export const Container = styled.div`
+export const Container = styled.div<{ stage: number }>`
   display: flex;
-  flex-basis: ${basis};
+  flex-basis: ${({ stage }) =>
+    Math.floor(100 / (stage === 2 ? stage : stage / 2) - 1.5 * 2)}%;
   flex-wrap: wrap;
   margin: 1.5%;
   border: 1px solid black;

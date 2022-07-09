@@ -4,10 +4,7 @@ import countriesData from "../../constant/countriesData";
 
 const useGamePage = () => {
   const { stage } = useParams();
-  const [countries, setCountries] = useState<any>({
-    팔레스타인: "동예루살렘/라말라(이스라엘)",
-    필리핀: "마닐라",
-  });
+  const [countries, setCountries] = useState<any | null>(null);
   const [countriesArr, setCountriesArr] = useState<string[]>([]);
   const [check, setCheck] = useState<string[]>([]);
 
@@ -16,6 +13,18 @@ const useGamePage = () => {
       setCountriesArr((val: any) => [...val, key, value]);
     }
     setCountriesArr((val) => val.sort(() => Math.random() - 0.5));
+  };
+
+  const handleGenerateCountries = (num: number) => {
+    let stage = num === (2 && 8) ? num : 2;
+    const tempCountries = Object.keys(countriesData)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, stage);
+    let temp: any = {};
+    tempCountries.forEach((country) => {
+      temp[country] = countriesData[country as keyof typeof countriesData];
+    });
+    setCountries(temp);
   };
 
   const handleClick = (data: string) => {
@@ -38,8 +47,13 @@ const useGamePage = () => {
   };
 
   useEffect(() => {
-    handleRandomCountries();
+    handleGenerateCountries(Number(stage) ?? 2);
   }, []);
+
+  useEffect(() => {
+    if (!countries) return;
+    handleRandomCountries();
+  }, [countries]);
 
   useEffect(() => {
     if (check.length === 2) {
