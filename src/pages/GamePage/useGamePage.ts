@@ -30,19 +30,31 @@ const useGamePage = () => {
   const handleClick = (data: string) => {
     if (check.length < 2) {
       setCheck((val) => [...val, data]);
-      handleStyle(data, "blue");
+      handleStyle(data, "selected");
     } else {
       check.forEach((val) => {
-        handleStyle(val, "white");
+        handleStyle(val, "idle");
       });
       setCheck([data]);
-      handleStyle(data, "blue");
+      handleStyle(data, "selected");
     }
   };
 
   const handleStyle = (data: string, style: string) => {
     const dom = document.getElementById(data);
     if (!dom) return;
+    if (style === "idle") {
+      dom.style.transform = "translateZ(0)";
+      dom.style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+      dom.style.color = "black";
+    } else if (style === "selected") {
+      dom.style.boxShadow = "rgb(38, 57, 77) 0px 20px 30px -10px";
+      dom.style.transform = "translateZ(10px)";
+    } else if (style === "wrong") {
+      dom.style.transform = "translateZ(0)";
+      dom.style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+      dom.style.color = "red";
+    }
     dom.style.backgroundColor = style;
   };
 
@@ -68,7 +80,7 @@ const useGamePage = () => {
         );
       } else {
         check.forEach((val) => {
-          handleStyle(val, "red");
+          handleStyle(val, "wrong");
         });
       }
     } else {
